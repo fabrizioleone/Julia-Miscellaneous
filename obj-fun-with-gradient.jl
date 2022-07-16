@@ -29,9 +29,7 @@ function fg!(F, G, x, a, b)
     # Define gradient
     if G != nothing
       grad = 4 * common
-      for i in 1:length(grad)
-        G[i] = grad[i]
-      end
+      [G[i] = grad[i] for i in 1:length(grad)]
     end
 
     # Define objective function
