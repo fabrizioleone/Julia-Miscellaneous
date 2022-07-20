@@ -21,7 +21,7 @@ function grafun(x::Vector, a::Vector, b::Vector)
 end
 
 # Objective fun & gradient together
-function fg!(F, G, x, a, b)
+function fg!(F, G, x::Vector, a::Vector, b::Vector)
     
     # Common calculations
     common = (2*x .- a.*b)
