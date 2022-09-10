@@ -10,7 +10,7 @@ x0   = ones(N)
 w    = 1.0
 A    = rand(N, N)
 
-# Define objective function x = A * x
+# Define objective function: x = A * x
 obj_fun(x, A) = sum(abs2.(x .+ A * x))
 
 # Define constraint: ∑ x 
