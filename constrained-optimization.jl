@@ -9,12 +9,13 @@ N    = 3
 x0   = ones(N)
 w    = 1.0
 A    = rand(N, N)
+a    = 2.0
 
 # Define objective function: x = A * x
 obj_fun(x, A) = sum(abs2.(x .+ A * x))
 
 # Define constraint: ∑ x 
-con_c!(c, x) = (c[1] = sum(x); c)
+con_c!(c, x, a) = (c[1] = a*sum(x))
 
 # Define constraints on x 
 lx   = fill(0, N)
@@ -28,16 +29,7 @@ uc   = [w]
 
 # Run optimization
 obj  = TwiceDifferentiable(x -> obj_fun(x, A), x0)
-con  = TwiceDifferentiableConstraints(con_c!, lx, ux, lc, uc)
+con  = TwiceDifferentiableConstraints((c,x) -> con_c!(c, x, a), lx, ux, lc, uc)
 res  = optimize(obj, con, x0, IPNewton(); autodiff = :forward)
 
-@show res
-
-
-
-
-
-
-
-
-
+res.minimizer
