@@ -1,4 +1,4 @@
-#Call Packages
+# Call Packages
 using Random, Optim
 
 # Set seeds
@@ -12,19 +12,19 @@ A    = rand(N, N)
 a    = 2.0
 
 # Define objective function: x = A * x
-obj_fun(x, A) = sum(abs2.(x .+ A * x))
+obj_fun(x, A) = sum(abs2.(x .- A * x))
 
-# Define constraint: ∑ x 
+# Define constraint: a * ∑ x 
 con_c!(c, x, a) = (c[1] = a*sum(x))
 
 # Define constraints on x 
 lx   = fill(0, N)
 ux   = fill(Inf, N)
 
-# Define constraints on ∑ x 
+# Define constraints on a * ∑ x 
 lc   = [w]
 uc   = [w]
-# -> This way lc <= ∑ x <= uc --> ∑ x = w
+# -> This way lc <= a * ∑ x <= uc --> ∑ x = w
 # see also: https://julianlsolvers.github.io/Optim.jl/stable/#examples/generated/ipnewton_basics/#generic-nonlinear-constraints
 
 # Run optimization
