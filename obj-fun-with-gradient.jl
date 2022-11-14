@@ -27,13 +27,13 @@ function fg!(F, G, x::Vector, a::Vector, b::Vector)
     common = (2*x .- a.*b)
 
     # Define gradient
-    if G != nothing
+    if G !== nothing
       grad = 4 * common
-      [G[i] = grad[i] for i in 1:length(grad)]
+      copy!(G, grad)
     end
 
     # Define objective function
-    if F != nothing
+    if F !== nothing
       F = sum(common.^2)
       return F
     end
