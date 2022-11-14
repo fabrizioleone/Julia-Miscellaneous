@@ -49,7 +49,7 @@ function obj_fun!(F, x, a)
 end
 
 # Run optimization
-res1 = nlsolve((F,x) -> obj_fun!(F, x,a), x0, autodiff = :forward)
+res1 = nlsolve((F,x) -> obj_fun!(F, x, a), x0, autodiff = :forward)
 
 #--------------------------------------------------------#
 # Display solution
